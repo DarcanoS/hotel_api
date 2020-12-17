@@ -1,6 +1,6 @@
 from db.hotel_db import HotelInDB
 from db.hotel_db import get_hotel,update_hotel, get_all_hotel
-from models.hotel_models import HotelOut, HotelIn
+from models.hotel_models import HotelOut, HotelIn, HotelLog
 
 import datetime
 from fastapi import FastAPI
@@ -41,3 +41,12 @@ async def add_hotel(hotel_in: HotelInDB):
     update_hotel(hotel_in)
     hotel_out = HotelOut(**hotel_in.dict())
     return hotel_out
+
+@api.post("/hotel/login")
+async def login_hotel(hotel_log: HotelLog):
+    hotel_in_db = get_hotel(hotel_log.hotelname)
+    hotel_log_password = hotel_log.password
+    if hotel_in_db == None or hotel_log_password != hotel_in_db.password:
+        raise HTTPException(status_code=404, detail="Usuario o contraseña incorrecta.")
+    else:
+        return  {"Autenticado": True}
