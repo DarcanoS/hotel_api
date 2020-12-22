@@ -35,3 +35,10 @@ def update_hotel(hotel: HotelInDB):
 
 def get_all_hotel():
     return database_hotel
+
+def delete_hotel(name: str):
+    if name in database_hotel.keys():
+        del database_hotel[name]
+        return "Eliminado"
+    else:
+        return "Usuario no existente"

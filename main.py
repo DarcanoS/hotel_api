@@ -1,5 +1,5 @@
 from db.hotel_db import HotelInDB
-from db.hotel_db import get_hotel,update_hotel, get_all_hotel
+from db.hotel_db import get_hotel,update_hotel, get_all_hotel, delete_hotel
 from models.hotel_models import HotelOut, HotelIn, HotelLog
 
 import datetime
@@ -50,3 +50,10 @@ async def login_hotel(hotel_log: HotelLog):
         raise HTTPException(status_code=404, detail="Usuario o contraseña incorrecta.")
     else:
         return  {"Autenticado": True}
+    
+@api.delete("/hotel/delete/{hotelname}")
+async def delete_hotel_in_DB(hotelname: str):
+    if delete_hotel(hotelname) == "Usuario no existente":
+        raise HTTPException(status_code=404, detail="Usuario no existente")
+    else:
+        return {"Eliminado": True}
