@@ -1,3 +1,14 @@
+from fastapi import Depends, FastAPI
+
+from routers.hotel_router import router as router_hotel
+
+api = FastAPI()
+
+api.include_router(router_hotel)
+
+
+
+'''
 from db.hotel_db import HotelInDB
 from db.hotel_db import get_hotel,update_hotel, get_all_hotel, delete_hotel
 from models.hotel_models import HotelOut, HotelIn, HotelLog
@@ -57,3 +68,5 @@ async def delete_hotel_in_DB(hotelname: str):
         raise HTTPException(status_code=404, detail="Usuario no existente")
     else:
         return {"Eliminado": True}
+
+'''

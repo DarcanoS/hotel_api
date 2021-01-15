@@ -11,6 +11,9 @@ class HotelOut(BaseModel):
     hotelname: str
     price_general: int
     quantity_room: int
+    
+    class Config:
+        orm_mode = True
 
 class HotelLog(BaseModel):
     hotelname: str

@@ -1,3 +1,19 @@
+from sqlalchemy import Column, Integer, String
+from db.db_connection import Base, engine
+
+class HotelInDB(Base):
+    __tablename__ = "hotel"
+
+    hotelname = Column(String, primary_key = True, unique = True)
+    password = Column(String)
+    location = Column(String)
+    price_general = Column(Integer)
+    quantity_room = Column(Integer)
+    
+Base.metadata.create_all(bind=engine)
+
+
+'''
 from typing import Dict
 from pydantic import BaseModel
 
@@ -42,3 +58,4 @@ def delete_hotel(name: str):
         return "Eliminado"
     else:
         return "Usuario no existente"
+'''
